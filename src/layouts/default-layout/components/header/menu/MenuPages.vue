@@ -163,7 +163,6 @@ export default defineComponent({
 
     const translate = (text: string) => {
       if (te(text)) {
-        console.log(text, t(text));
         return t(text);
       } else {
         return text;

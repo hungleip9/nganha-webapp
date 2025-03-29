@@ -176,9 +176,8 @@ export default defineComponent({
     const translate = (text: string) => {
       if (te(text)) {
         return t(text);
-      } else {
-        return text;
       }
+      return text;
     };
 
     const hasActiveChildren = (match: string) => {

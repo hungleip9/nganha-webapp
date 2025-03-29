@@ -34,99 +34,6 @@
     <div class="separator my-2"></div>
     <!--end::Menu separator-->
 
-    <!-- <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        My Profile
-      </router-link>
-    </div>
-
-    <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        <span class="menu-text">My Projects</span>
-        <span class="menu-badge">
-          <span class="badge badge-light-danger badge-circle fw-bold fs-7"
-            >3</span
-          >
-        </span>
-      </router-link>
-    </div>
-
-    <div
-      class="menu-item px-5"
-      data-kt-menu-trigger="hover"
-      data-kt-menu-placement="left-start"
-      data-kt-menu-flip="center, top"
-    >
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        <span class="menu-title">My Subscription</span>
-        <span class="menu-arrow"></span>
-      </router-link>
-
-      <div class="menu-sub menu-sub-dropdown w-175px py-4">
-        <div class="menu-item px-3">
-          <router-link to="/pages/profile/overview" class="menu-link px-5">
-            Referrals
-          </router-link>
-        </div>
-
-        <div class="menu-item px-3">
-          <router-link to="/pages/profile/overview" class="menu-link px-5">
-            Billing
-          </router-link>
-        </div>
-
-        <div class="menu-item px-3">
-          <router-link to="/pages/profile/overview" class="menu-link px-5">
-            Payments
-          </router-link>
-        </div>
-
-        <div class="menu-item px-3">
-          <router-link
-            to="/pages/profile/overview"
-            class="menu-link d-flex flex-stack px-5"
-          >
-            Statements
-
-            <i
-              class="fas fa-exclamation-circle ms-2 fs-7"
-              data-bs-toggle="tooltip"
-              title="View your statements"
-            ></i>
-          </router-link>
-        </div>
-
-        <div class="separator my-2"></div>
-
-        <div class="menu-item px-3">
-          <div class="menu-content px-3">
-            <label
-              class="form-check form-switch form-check-custom form-check-solid"
-            >
-              <input
-                class="form-check-input w-30px h-20px"
-                type="checkbox"
-                value="1"
-                checked
-                name="notifications"
-              />
-              <span class="form-check-label text-muted fs-7">
-                Notifications
-              </span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-item px-5">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        My Statements
-      </router-link>
-    </div>
-
-    <div class="separator my-2"></div>
-
     <div
       class="menu-item px-5"
       data-kt-menu-trigger="hover"
@@ -170,83 +77,23 @@
 
         <div class="menu-item px-3">
           <a
-            @click="setLang('es')"
+            @click="setLang('vn')"
             href="#"
             class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage === 'es' }"
+            :class="{ active: currentLanguage === 'vn' }"
           >
             <span class="symbol symbol-20px me-4">
               <img
                 class="rounded-1"
-                :src="getAssetPath('media/flags/spain.svg')"
+                :src="getAssetPath('media/flags/vietnam.svg')"
                 alt="metronic"
               />
             </span>
-            Spanish
-          </a>
-        </div>
-
-        <div class="menu-item px-3">
-          <a
-            @click="setLang('de')"
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage === 'de' }"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                :src="getAssetPath('media/flags/germany.svg')"
-                alt="metronic"
-              />
-            </span>
-            German
-          </a>
-        </div>
-
-        <div class="menu-item px-3">
-          <a
-            @click="setLang('ja')"
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage === 'ja' }"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                :src="getAssetPath('media/flags/japan.svg')"
-                alt="metronic"
-              />
-            </span>
-            Japanese
-          </a>
-        </div>
-
-        <div class="menu-item px-3">
-          <a
-            @click="setLang('fr')"
-            href="#"
-            class="menu-link d-flex px-5"
-            :class="{ active: currentLanguage === 'fr' }"
-          >
-            <span class="symbol symbol-20px me-4">
-              <img
-                class="rounded-1"
-                :src="getAssetPath('media/flags/france.svg')"
-                alt="metronic"
-              />
-            </span>
-            French
+            Việt Nam
           </a>
         </div>
       </div>
     </div>
-
-    <div class="menu-item px-5 my-1">
-      <router-link to="/pages/profile/overview" class="menu-link px-5">
-        Account Settings
-      </router-link>
-    </div> -->
 
     <div class="menu-item px-5">
       <a @click="signOut()" class="menu-link px-5"> Sign Out </a>
@@ -278,21 +125,9 @@ export default defineComponent({
         flag: getAssetPath("media/flags/united-states.svg"),
         name: "English",
       },
-      es: {
-        flag: getAssetPath("media/flags/spain.svg"),
-        name: "Spanish",
-      },
-      de: {
-        flag: getAssetPath("media/flags/germany.svg"),
-        name: "German",
-      },
-      ja: {
-        flag: getAssetPath("media/flags/japan.svg"),
-        name: "Japanese",
-      },
-      fr: {
-        flag: getAssetPath("media/flags/france.svg"),
-        name: "French",
+      vn: {
+        flag: getAssetPath("media/flags/vietnam.svg"),
+        name: "Việt Name",
       },
     };
 

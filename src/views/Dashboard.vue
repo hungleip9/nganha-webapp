@@ -1,40 +1,46 @@
 <template>
-  <el-form :model="form" label-width="180px" class="form-container">
+  <el-form
+    ref="ruleFormRef"
+    :model="form"
+    label-width="180px"
+    :rules="rules"
+    class="form-container"
+  >
     <el-row :gutter="20">
       <!-- Cột trái -->
       <el-col :xs="24" :sm="12">
-        <el-form-item label="Mã Data (tự sinh)">
+        <el-form-item label="Mã Data (tự sinh)" prop="maData">
           <el-input v-model="form.maData" disabled />
         </el-form-item>
 
-        <el-form-item label="Tài khoản khách hàng">
+        <el-form-item label="Tài khoản khách hàng" prop="taiKhoanKH">
           <el-input v-model="form.taiKhoanKH" />
         </el-form-item>
 
-        <el-form-item label="Tên khách hàng">
+        <el-form-item label="Tên khách hàng" prop="tenKH">
           <el-input v-model="form.tenKH" />
         </el-form-item>
 
-        <el-form-item label="Số điện thoại">
+        <el-form-item label="Số điện thoại" prop="soDienThoai">
           <el-input
             v-model="form.soDienThoai"
             @input="form.soDienThoai = form.soDienThoai.replace(/[^0-9]/g, '')"
           />
         </el-form-item>
 
-        <el-form-item label="Ngành Data">
+        <el-form-item label="Ngành Data" prop="nganhData">
           <el-input v-model="form.nganhData" />
         </el-form-item>
 
-        <el-form-item label="Nguồn Data">
+        <el-form-item label="Nguồn Data" prop="nguonData">
           <el-input v-model="form.nguonData" />
         </el-form-item>
 
-        <el-form-item label="Người phụ trách">
+        <el-form-item label="Người phụ trách" prop="nguoiPhuTrach">
           <el-input v-model="form.nguoiPhuTrach" />
         </el-form-item>
 
-        <el-form-item label="Loại khách hàng">
+        <el-form-item label="Loại khách hàng" prop="loaiKH">
           <el-select
             v-model="form.loaiKH"
             placeholder="Chọn loại khách hàng"
@@ -47,16 +53,20 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="Mã khách hàng">
+        <el-form-item label="Mã khách hàng" prop="maKhachHang">
           <el-input v-model="form.maKhachHang" />
         </el-form-item>
 
-        <el-form-item label="NVKD chính">
+        <el-form-item label="NVKD chính" prop="nvkdChinh">
           <el-input v-model="form.nvkdChinh" />
         </el-form-item>
 
-        <el-form-item label="NVKD phụ">
+        <el-form-item label="NVKD phụ" prop="nvkdPhu">
           <el-input v-model="form.nvkdPhu" />
+        </el-form-item>
+
+        <el-form-item label="Mã đơn hàng" prop="donHang">
+          <el-input v-model="form.donHang" />
         </el-form-item>
 
         <el-form-item label="Đính kèm HĐ nguyên tắc">
@@ -68,6 +78,73 @@
           >
             <el-button type="primary">Tải lên hợp đồng</el-button>
           </el-upload>
+        </el-form-item>
+      </el-col>
+
+      <!-- Cột phải -->
+      <el-col :xs="24" :sm="12">
+        <el-form-item label="Gán CSKH" prop="nhanVienChamSoc">
+          <el-select
+            v-model="form.nhanVienChamSoc"
+            multiple
+            placeholder="Chọn nhân viên"
+            style="width: 100%"
+          >
+            <el-option label="Nguyễn Văn A" value="nv1" />
+            <el-option label="Trần Thị B" value="nv2" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="Mã số thuế" prop="maSoThue">
+          <el-input v-model="form.maSoThue" />
+        </el-form-item>
+
+        <el-form-item label="Địa điểm công ty" prop="diaDiemCongTy">
+          <el-input v-model="form.diaDiemCongTy" />
+        </el-form-item>
+
+        <el-form-item label="Tên giám đốc" prop="tenGiamDoc">
+          <el-input v-model="form.tenGiamDoc" />
+        </el-form-item>
+
+        <el-form-item label="Ngày sinh Giám đốc" prop="ngaySinhGiamDoc">
+          <el-date-picker
+            v-model="form.ngaySinhGiamDoc"
+            type="date"
+            style="width: 100%"
+          />
+        </el-form-item>
+
+        <el-form-item label="Ngày sinh khách hàng" prop="ngaySinhKH">
+          <el-date-picker
+            v-model="form.ngaySinhKH"
+            type="date"
+            style="width: 100%"
+          />
+        </el-form-item>
+
+        <el-form-item label="Địa điểm giao hàng" prop="diaDiemGiaoHang">
+          <el-input v-model="form.diaDiemGiaoHang" />
+        </el-form-item>
+
+        <el-form-item label="Tuổi nợ (ngày)" prop="tuoiNo">
+          <el-input-number v-model="form.tuoiNo" :min="0" style="width: 100%" />
+        </el-form-item>
+
+        <el-form-item label="Hạn mức nợ" prop="hanMucNo">
+          <el-input-number
+            v-model="form.hanMucNo"
+            :min="0"
+            style="width: 100%"
+          />
+        </el-form-item>
+
+        <el-form-item label="Người giám sát" prop="giamSat">
+          <el-input v-model="form.giamSat" />
+        </el-form-item>
+
+        <el-form-item label="Nhóm ZALO" prop="nhomZalo">
+          <el-input v-model="form.nhomZalo" />
         </el-form-item>
 
         <el-form-item label="Đính kèm CCCD / GPKD">
@@ -82,103 +159,64 @@
           </el-upload>
         </el-form-item>
       </el-col>
-
-      <!-- Cột phải -->
-      <el-col :xs="24" :sm="12">
-        <el-form-item label="Gán CSKH">
-          <el-select
-            v-model="form.nhanVienChamSoc"
-            multiple
-            placeholder="Chọn nhân viên"
-            style="width: 100%"
-          >
-            <el-option label="Nguyễn Văn A" value="nv1" />
-            <el-option label="Trần Thị B" value="nv2" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Mã số thuế">
-          <el-input v-model="form.maSoThue" />
-        </el-form-item>
-
-        <el-form-item label="Địa điểm công ty">
-          <el-input v-model="form.diaDiemCongTy" />
-        </el-form-item>
-
-        <el-form-item label="Tên giám đốc">
-          <el-input v-model="form.tenGiamDoc" />
-        </el-form-item>
-
-        <el-form-item label="Ngày sinh Giám đốc">
-          <el-date-picker
-            v-model="form.ngaySinhGiamDoc"
-            type="date"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Ngày sinh khách hàng">
-          <el-date-picker
-            v-model="form.ngaySinhKH"
-            type="date"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Địa điểm giao hàng">
-          <el-input v-model="form.diaDiemGiaoHang" />
-        </el-form-item>
-
-        <el-form-item label="Tuổi nợ (ngày)">
-          <el-input-number v-model="form.tuoiNo" :min="0" style="width: 100%" />
-        </el-form-item>
-
-        <el-form-item label="Hạn mức nợ">
-          <el-input-number
-            v-model="form.hanMucNo"
-            :min="0"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Người giám sát">
-          <el-input v-model="form.giamSat" />
-        </el-form-item>
-
-        <el-form-item label="Nhóm ZALO">
-          <el-input v-model="form.nhomZalo" />
-        </el-form-item>
-
-        <el-form-item label="Mã đơn hàng">
-          <el-input v-model="form.donHang" />
-        </el-form-item>
-      </el-col>
     </el-row>
 
     <!-- Các phần toàn dòng -->
-    <el-form-item label="Logs chăm sóc">
+    <el-form-item label="Logs chăm sóc" prop="logsChamSoc">
       <el-input v-model="form.logsChamSoc" type="textarea" rows="3" />
     </el-form-item>
 
-    <el-form-item label="Nhu cầu quan tâm">
+    <el-form-item label="Nhu cầu quan tâm" prop="nhuCau">
       <el-input v-model="form.nhuCau" type="textarea" rows="2" />
     </el-form-item>
 
-    <el-form-item label="Log đánh giá / góp ý / claim">
+    <el-form-item label="Log đánh giá / góp ý / claim" prop="logDanhGia">
       <el-input v-model="form.logDanhGia" type="textarea" rows="2" />
     </el-form-item>
 
     <!-- Nút hành động -->
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">Tạo mới</el-button>
-      <el-button>Huỷ</el-button>
+      <el-button type="primary" @click="submitForm(ruleFormRef)"
+        >Tạo mới</el-button
+      >
+      <el-button @click="resetForm(ruleFormRef)">Huỷ</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-
+import { reactive, ref, onMounted, onBeforeMount } from "vue";
+import type { ComponentSize, FormInstance, FormRules } from "element-plus";
+interface RuleForm {
+  maData: string;
+  taiKhoanKH: string;
+  tenKH: string;
+  soDienThoai: string;
+  nganhData: string;
+  nguonData: string;
+  nguoiPhuTrach: string;
+  logsChamSoc: string;
+  loaiKH: string;
+  maKhachHang: string;
+  nvkdChinh: string;
+  nvkdPhu: string;
+  nhanVienChamSoc: string[];
+  nhuCau: string;
+  maSoThue: string;
+  diaDiemCongTy: string;
+  tenGiamDoc: string;
+  ngaySinhGiamDoc: string;
+  ngaySinhKH: string;
+  diaDiemGiaoHang: string;
+  tuoiNo: number;
+  hanMucNo: number;
+  giamSat: string;
+  nhomZalo: string;
+  donHang: string;
+  logDanhGia: string;
+}
+const ruleFormRef = ref<FormInstance>();
+const rules = ref({});
 const form = reactive({
   maData: "DATA123456",
   taiKhoanKH: "",
@@ -207,22 +245,59 @@ const form = reactive({
   donHang: "",
   logDanhGia: "",
 });
+onBeforeMount(() => {
+  getRules();
+})
 
+const getRules = () => {
+  Object.keys(form).forEach((key) => {
+    const arrRule = [
+      {
+        required: false,
+      },
+    ];
+    rules.value[key] = arrRule
+  })
+  rules.value.taiKhoanKH = [
+    {
+      required: true,
+      message: "Bạn chưa nhập tài khoản khách hàng!",
+      trigger: "blur",
+    }
+  ];
+  rules.value.soDienThoai = [
+    {
+      required: true,
+      message: "Bạn chưa nhập số điện thoại!",
+      trigger: "change",
+    }
+  ];
+};
 const handleContractChange = (file: any) => {
   console.log("Hợp đồng:", file.name);
 };
 const handleCCCDChange = (file: any) => {
   console.log("Tài liệu CCCD/GPKD:", file.name);
 };
-const onSubmit = () => {
-  console.log("Form dữ liệu:", form);
+const submitForm = async (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  await formEl.validate((valid, fields) => {
+    if (valid) {
+      console.log("submit!");
+    } else {
+      console.log("error submit!", fields);
+    }
+  });
+};
+const resetForm = (formEl: FormInstance | undefined) => {
+  if (!formEl) return;
+  formEl.resetFields();
 };
 </script>
 
 <style scoped>
 .form-container {
   padding: 20px;
-  background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
