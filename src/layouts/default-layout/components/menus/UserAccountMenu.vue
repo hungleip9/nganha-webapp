@@ -34,15 +34,12 @@
     <div class="separator my-2"></div>
     <!--end::Menu separator-->
 
-    <!--begin::Menu item-->
-    <div class="menu-item px-5">
+    <!-- <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         My Profile
       </router-link>
     </div>
-    <!--end::Menu item-->
 
-    <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         <span class="menu-text">My Projects</span>
@@ -53,9 +50,7 @@
         </span>
       </router-link>
     </div>
-    <!--end::Menu item-->
 
-    <!--begin::Menu item-->
     <div
       class="menu-item px-5"
       data-kt-menu-trigger="hover"
@@ -67,33 +62,25 @@
         <span class="menu-arrow"></span>
       </router-link>
 
-      <!--begin::Menu sub-->
       <div class="menu-sub menu-sub-dropdown w-175px py-4">
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <router-link to="/pages/profile/overview" class="menu-link px-5">
             Referrals
           </router-link>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <router-link to="/pages/profile/overview" class="menu-link px-5">
             Billing
           </router-link>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <router-link to="/pages/profile/overview" class="menu-link px-5">
             Payments
           </router-link>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <router-link
             to="/pages/profile/overview"
@@ -108,13 +95,9 @@
             ></i>
           </router-link>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu separator-->
         <div class="separator my-2"></div>
-        <!--end::Menu separator-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <div class="menu-content px-3">
             <label
@@ -133,25 +116,17 @@
             </label>
           </div>
         </div>
-        <!--end::Menu item-->
       </div>
-      <!--end::Menu sub-->
     </div>
-    <!--end::Menu item-->
 
-    <!--begin::Menu item-->
     <div class="menu-item px-5">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         My Statements
       </router-link>
     </div>
-    <!--end::Menu item-->
 
-    <!--begin::Menu separator-->
     <div class="separator my-2"></div>
-    <!--end::Menu separator-->
 
-    <!--begin::Menu item-->
     <div
       class="menu-item px-5"
       data-kt-menu-trigger="hover"
@@ -174,9 +149,7 @@
         </span>
       </router-link>
 
-      <!--begin::Menu sub-->
       <div class="menu-sub menu-sub-dropdown w-175px py-4">
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
             @click="setLang('en')"
@@ -194,9 +167,7 @@
             English
           </a>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
             @click="setLang('es')"
@@ -214,9 +185,7 @@
             Spanish
           </a>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
             @click="setLang('de')"
@@ -234,9 +203,7 @@
             German
           </a>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
             @click="setLang('ja')"
@@ -254,9 +221,7 @@
             Japanese
           </a>
         </div>
-        <!--end::Menu item-->
 
-        <!--begin::Menu item-->
         <div class="menu-item px-3">
           <a
             @click="setLang('fr')"
@@ -274,27 +239,19 @@
             French
           </a>
         </div>
-        <!--end::Menu item-->
       </div>
-      <!--end::Menu sub-->
     </div>
-    <!--end::Menu item-->
 
-    <!--begin::Menu item-->
     <div class="menu-item px-5 my-1">
       <router-link to="/pages/profile/overview" class="menu-link px-5">
         Account Settings
       </router-link>
-    </div>
-    <!--end::Menu item-->
+    </div> -->
 
-    <!--begin::Menu item-->
     <div class="menu-item px-5">
       <a @click="signOut()" class="menu-link px-5"> Sign Out </a>
     </div>
-    <!--end::Menu item-->
   </div>
-  <!--end::Menu-->
 </template>
 
 <script lang="ts">

@@ -1,7 +1,5 @@
 <template>
-  <!--begin::sidebar menu-->
   <div class="app-sidebar-menu overflow-hidden flex-column-fluid">
-    <!--begin::Menu wrapper-->
     <div
       id="kt_app_sidebar_menu_wrapper"
       class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
@@ -13,7 +11,6 @@
       data-kt-scroll-offset="5px"
       data-kt-scroll-save-state="true"
     >
-      <!--begin::Menu-->
       <div
         id="#kt_app_sidebar_menu"
         class="menu menu-column menu-rounded menu-sub-indention px-3"
@@ -149,89 +146,9 @@
             </div>
           </template>
         </template>
-
-        <div class="menu-item pt-5">
-          <!--begin:Menu content-->
-          <div class="menu-content">
-            <span class="menu-heading fw-bold text-uppercase fs-7">Help</span>
-          </div>
-          <!--end:Menu content-->
-        </div>
-        <!--begin:Menu item-->
-        <div class="menu-item">
-          <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="https://preview.keenthemes.com/metronic8/vue/docs/base/utilities"
-          >
-            <span class="menu-icon">
-              <i
-                v-if="sidebarMenuIcons === 'bootstrap'"
-                class="bi bi-briefcase fs-3"
-              ></i>
-              <KTIcon
-                v-else-if="sidebarMenuIcons === 'keenthemes'"
-                icon-name="rocket"
-                icon-class="fs-2"
-              />
-            </span>
-            <span class="menu-title">Components</span>
-          </a>
-          <!--end:Menu link-->
-        </div>
-        <!--end:Menu item-->
-        <div class="menu-item">
-          <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="https://preview.keenthemes.com/metronic8/vue/docs/index"
-          >
-            <span class="menu-icon">
-              <i
-                v-if="sidebarMenuIcons === 'bootstrap'"
-                class="bi bi-box fs-3"
-              ></i>
-              <KTIcon
-                v-else-if="sidebarMenuIcons === 'keenthemes'"
-                icon-name="abstract-26"
-                icon-class="fs-2"
-              />
-            </span>
-            <span class="menu-title">Documentation</span>
-          </a>
-          <!--end:Menu link-->
-        </div>
-        <!--begin:Menu item-->
-        <!--end:Menu item-->
-        <div class="menu-item">
-          <!--begin:Menu link-->
-          <a
-            class="menu-link"
-            href="https://preview.keenthemes.com/metronic8/vue/docs/getting-started/changelog"
-          >
-            <span class="menu-icon">
-              <i
-                v-if="sidebarMenuIcons === 'bootstrap'"
-                class="bi bi-diagram-3 fs-3"
-              ></i>
-              <KTIcon
-                v-else-if="sidebarMenuIcons === 'keenthemes'"
-                icon-name="code"
-                icon-class="fs-2"
-              />
-            </span>
-            <span class="menu-title">Changelog</span>
-          </a>
-          <!--end:Menu link-->
-        </div>
-        <!--begin:Menu item-->
-        <!--end:Menu item-->
       </div>
-      <!--end::Menu-->
     </div>
-    <!--end::Menu wrapper-->
   </div>
-  <!--end::sidebar menu-->
 </template>
 
 <script lang="ts">
