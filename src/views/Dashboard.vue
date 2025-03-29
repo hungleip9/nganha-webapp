@@ -1,132 +1,112 @@
 <template>
-  <!--begin::Row-->
-  <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-    <!--begin::Col-->
-    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-      <Widget1
-        className="h-md-50 mb-5 mb-xl-10"
-        description="Active Projects"
-        bgColor="#F1416C"
-        :bgImage="getAssetPath('media/patterns/vector-1.png')"
-      />
-
-      <Widget2
-        className="h-md-50 mb-5 mb-xl-10"
-        :icon="false"
-        stats="357"
-        description="Professionals"
-        labelColor="dark"
-        textColor="gray-300"
+  <div class="border">
+    <!--begin::Input group-->
+    <div class="input-group mb-5">
+      <span class="input-group-text" id="basic-addon1">@</span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
       />
     </div>
-    <!--end::Col-->
+    <!--end::Input group-->
 
-    <!--begin::Col-->
-    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
-      <Widget3 className="h-md-50 mb-5 mb-xl-10" :chartSize="70" />
-
-      <Widget4 className="h-lg-50" />
+    <!--begin::Input group-->
+    <div class="input-group mb-5">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="basic-addon2"
+      />
+      <span class="input-group-text" id="basic-addon2">@example.com</span>
     </div>
-    <!--end::Col-->
+    <!--end::Input group-->
 
-    <!--begin::Col-->
-    <div class="col-xxl-6">
-      <Widget5 className="h-md-100" />
-    </div>
-    <!--end::Col-->
-  </div>
-  <!--end::Row-->
-
-  <!--begin::Row-->
-  <div class="row gx-5 gx-xl-10">
-    <!--begin::Col-->
-    <div class="col-xxl-6 mb-5 mb-xl-10">
-      <Widget6 className="h-xl-100" height="275px" />
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-6 mb-5 mb-xl-10">
-      <Widget7 className="h-xl-100" />
-    </div>
-    <!--end::Col-->
-  </div>
-  <!--end::Row-->
-
-  <!--begin::Row-->
-  <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-    <!--begin::Col-->
-    <div class="col-xxl-6">
-      <Widget8
-        className="h-xl-100"
-        :image="getAssetPath('media/stock/600x600/img-65.jpg')"
+    <!--begin::Input group-->
+    <label for="basic-url" class="form-label">Your vanity URL</label>
+    <div class="input-group mb-5">
+      <span class="input-group-text" id="basic-addon3"
+        >https://example.com/users/</span
+      >
+      <input
+        type="text"
+        class="form-control"
+        id="basic-url"
+        aria-describedby="basic-addon3"
       />
     </div>
-    <!--end::Col-->
+    <!--end::Input group-->
 
-    <!--begin::Col-->
-    <div class="col-xl-6">
-      <Widget9 className="h-lg-100" :height="300" />
+    <!--begin::Input group-->
+    <div class="input-group mb-5">
+      <span class="input-group-text">$</span>
+      <input
+        type="text"
+        class="form-control"
+        aria-label="Amount (to the nearest dollar)"
+      />
+      <span class="input-group-text">.00</span>
     </div>
-    <!--end::Col-->
+    <!--end::Input group-->
+
+    <!--begin::Input group-->
+    <div class="input-group mb-5">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+      />
+      <span class="input-group-text">@</span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Server"
+        aria-label="Server"
+      />
+    </div>
+    <!--end::Input group-->
+
+    <!--begin::Input group-->
+    <div class="input-group">
+      <span class="input-group-text">With textarea</span>
+      <textarea class="form-control" aria-label="With textarea"></textarea>
+    </div>
+    <!--end::Input group-->
+    <hr/>
+    <div class="table-responsive">
+      <table class="table table-striped gy-7 gs-7">
+        <thead>
+          <tr
+            class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200"
+          >
+            <th class="min-w-200px">Name</th>
+            <th class="min-w-400px">Position</th>
+            <th class="min-w-100px">Office</th>
+            <th class="min-w-200px">Age</th>
+            <th class="min-w-200px">Start date</th>
+            <th class="min-w-200px">Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="i in 20">
+            <td>Tiger Nixon</td>
+            <td>System Architect</td>
+            <td>Edinburgh</td>
+            <td>61</td>
+            <td>2011/04/25</td>
+            <td>$320,800</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <!--end::Row-->
-
-  <!--begin::Row-->
-  <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
-    <!--begin::Col-->
-    <div class="col-xl-4">
-      <MixedWidget5
-        widget-classes="card-xl-stretch mb-xl-8 h-md-100"
-        chart-color="primary"
-        chart-height="150"
-      ></MixedWidget5>
-    </div>
-    <!--end::Col-->
-
-    <!--begin::Col-->
-    <div class="col-xl-8">
-      <Widget10 className="h-md-100" />
-    </div>
-    <!--end::Col-->
-  </div>
-  <!--end::Row-->
 </template>
 
-<script lang="ts">
-import { getAssetPath } from "@/core/helpers/assets";
-import { defineComponent } from "vue";
-import Widget1 from "@/components/dashboard-default-widgets/Widget1.vue";
-import Widget2 from "@/components/dashboard-default-widgets/Widget2.vue";
-import Widget3 from "@/components/dashboard-default-widgets/Widget3.vue";
-import Widget4 from "@/components/dashboard-default-widgets/Widget4.vue";
-import Widget5 from "@/components/dashboard-default-widgets/Widget5.vue";
-import Widget6 from "@/components/dashboard-default-widgets/Widget6.vue";
-import Widget7 from "@/components/dashboard-default-widgets/Widget7.vue";
-import Widget8 from "@/components/dashboard-default-widgets/Widget8.vue";
-import Widget9 from "@/components/dashboard-default-widgets/Widget9.vue";
-import Widget10 from "@/components/dashboard-default-widgets/Widget10.vue";
-import MixedWidget5 from "@/components/widgets/mixed/Widget5.vue";
+<script setup></script>
 
-export default defineComponent({
-  name: "main-dashboard",
-  components: {
-    Widget1,
-    Widget2,
-    Widget3,
-    Widget4,
-    Widget5,
-    Widget6,
-    Widget7,
-    Widget8,
-    Widget9,
-    Widget10,
-    MixedWidget5,
-  },
-  setup() {
-    return {
-      getAssetPath,
-    };
-  },
-});
-</script>
+<style lang="scss" scoped></style>
