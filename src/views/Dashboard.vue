@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button type="primary" class="me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_new_data">Thêm mới data</el-button>
+    <el-button type="primary" class="me-2" @click="openModal()">Thêm mới data</el-button>
     <el-dropdown split-button type="primary" :disabled="!multipleSelection.length ? true : false">
       Gán nhân viên phụ trách data
       <template #dropdown>
@@ -63,13 +63,13 @@
         </template>
       </el-table-column>
     </el-table>
-    <KTNewData></KTNewData>
+    <KTNewData ref="modalKtNewData"></KTNewData>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import KTNewData from "@/components/modals/forms/AddNewData.vue";
+import KTNewData from "@/components/modals/dashboard/AddNewData.vue";
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { TableInstance } from 'element-plus'
 
@@ -97,7 +97,7 @@ interface tableData {
   nhanVienChamSoc: string,
   giamSat: string,
 }
-
+const modalKtNewData = ref()
 const search = ref("");
 const multipleSelection = ref<tableData[]>([])
 const multipleTableRef = ref<TableInstance>()
@@ -156,6 +156,10 @@ const openConfirm = () => {
         message: 'Không thành công!',
       })
     })
+}
+const openModal = () => {
+  if (!modalKtNewData.value) return
+  modalKtNewData.value.openModal()
 }
 
 const tableData: tableData[] = [

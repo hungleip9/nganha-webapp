@@ -1,0 +1,25 @@
+
+const headerMap = {
+  "Tài khoản khách hàng*": "taiKhoanKhachHang",
+  "Tên khách hàng*": "tenKhachHang",
+  "Số điện thoại*": "soDienThoai",
+  "Ngành Data": "nganhData",
+  "Nguồn Data": "nguonData",
+  "Người phụ trách": "nguoiPhuTrach",
+  "NVKD chính": "nvkdChinh",
+  "NVKD phụ": "nvkdPhu",
+  "Nhân viên chăm sóc": "nhanVienChamSoc",
+  "Mã số thuế": "maSoThue",
+  "Địa điểm công ty": "diaDiemCongTy",
+  "Tên giám đốc": "tenGiamDoc",
+  "Ngày sinh Giám đốc": "ngaySinhGiamDoc",
+  "Ngày sinh khách hàng": "ngaySinhKhachHang",
+  "Địa điểm giao hàng": "diaDiemGiaoHang",
+  "Người giám sát": "giamSat",
+  "Nhóm ZALO": "nhomZalo",
+  "Tuổi nợ (ngày)": "tuoiNo",
+  "Hạn mức nợ": "hanMucNo",
+  "Nhu cầu quan tâm": "nhuCau",
+  "Logs chăm sóc": "logsChamSoc",
+}
+export default headerMap;
