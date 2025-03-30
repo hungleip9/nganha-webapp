@@ -1,304 +1,262 @@
 <template>
-  <el-form
-    ref="ruleFormRef"
-    :model="form"
-    label-width="180px"
-    :rules="rules"
-    class="form-container"
-  >
-    <el-row :gutter="20">
-      <!-- Cột trái -->
-      <el-col :xs="24" :sm="12">
-        <el-form-item label="Mã Data (tự sinh)" prop="maData">
-          <el-input v-model="form.maData" disabled />
-        </el-form-item>
-
-        <el-form-item label="Tài khoản khách hàng" prop="taiKhoanKH">
-          <el-input v-model="form.taiKhoanKH" />
-        </el-form-item>
-
-        <el-form-item label="Tên khách hàng" prop="tenKH">
-          <el-input v-model="form.tenKH" />
-        </el-form-item>
-
-        <el-form-item label="Số điện thoại" prop="soDienThoai">
-          <el-input
-            v-model="form.soDienThoai"
-            @input="form.soDienThoai = form.soDienThoai.replace(/[^0-9]/g, '')"
-          />
-        </el-form-item>
-
-        <el-form-item label="Ngành Data" prop="nganhData">
-          <el-input v-model="form.nganhData" />
-        </el-form-item>
-
-        <el-form-item label="Nguồn Data" prop="nguonData">
-          <el-input v-model="form.nguonData" />
-        </el-form-item>
-
-        <el-form-item label="Người phụ trách" prop="nguoiPhuTrach">
-          <el-input v-model="form.nguoiPhuTrach" />
-        </el-form-item>
-
-        <el-form-item label="Loại khách hàng" prop="loaiKH">
-          <el-select
-            v-model="form.loaiKH"
-            placeholder="Chọn loại khách hàng"
-            style="width: 100%"
+  <div>
+    <el-button type="primary" class="me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_new_data">Thêm mới data</el-button>
+    <el-dropdown split-button type="primary" :disabled="!multipleSelection.length ? true : false">
+      Gán nhân viên phụ trách data
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item @click="openConfirm()">Nguyên Văn A</el-dropdown-item>
+          <el-dropdown-item @click="openConfirm()">Nguyễn Thị B</el-dropdown-item>
+          <el-dropdown-item @click="openConfirm()">Nguyễn Văn C</el-dropdown-item>
+          <el-dropdown-item @click="openConfirm()">Nguyễn Văn D</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+    <el-table
+      ref="multipleTableRef"
+      :data="filterTableData"
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" width="55" />
+      <el-table-column fixed="left" min-width="150" label="Mã data" prop="maData" />
+      <el-table-column min-width="200" label="Tài khoản khách hàng" prop="taiKhoanKhachHang" />
+      <el-table-column min-width="150" label="Tên khách hàng" prop="tenKhachHang" />
+      <el-table-column min-width="150" label="Số điện thoại" prop="soDienThoai" />
+      <el-table-column min-width="150" label="Ngành data" prop="nganhData" />
+      <el-table-column min-width="150" label="Nguồn data" prop="nguonData" />
+      <el-table-column min-width="150" label="Người phụ trách" prop="nguoiPhuTrach" />
+      <el-table-column min-width="150" label="Logs chăm sóc" prop="logsChamSoc" />
+      <el-table-column min-width="250" label="Nhân viên kinh doanh chính" prop="nvkdChinh" />
+      <el-table-column min-width="200" label="Nhân viên kinh doanh phụ" prop="nvkdPhu" />
+      <el-table-column min-width="200" label="Nhân viên chăm sóc" prop="nhanVienChamSoc" />
+      <el-table-column min-width="100" label="Nhu cầu" prop="nhuCau" />
+      <el-table-column min-width="100" label="Mã số thuế" prop="maSoThue" />
+      <el-table-column min-width="150" label="Địa điểm công ty" prop="diaDiemCongTy" />
+      <el-table-column min-width="150" label="Tên giám đốc" prop="tenGiamDoc" />
+      <el-table-column min-width="200" label="Ngày sinh giám đốc" prop="ngaySinhGiamDoc" />
+      <el-table-column min-width="200" label="Ngày sinh khách hàng" prop="ngaySinhKhachHang" />
+      <el-table-column min-width="200" label="Địa điểm giao hàng" prop="diaDiemGiaoHang" />
+      <el-table-column min-width="100" label="Tuổi nợ" prop="tuoiNo" />
+      <el-table-column min-width="150" label="Hạn mức nợ" prop="hanMucNo" >
+        <template #default="{ row }">
+          {{ numberFormat(row.hanMucNo) }}
+        </template>
+      </el-table-column>
+      <el-table-column min-width="100" label="Giám sát" prop="giamSat" />
+      <el-table-column min-width="100" label="Nhóm zalo" prop="nhomZalo" />
+      <el-table-column fixed="right" min-width="150" align="right">
+        <template #header>
+          <el-input v-model="search" size="small" placeholder="Tìm kiếm mã data" />
+        </template>
+        <template #default="scope">
+          <el-button size="small" @click="handleEdit(scope.row)">
+            Edit
+          </el-button>
+          <el-button
+            size="small"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
           >
-            <el-option label="Data" value="data" />
-            <el-option label="Loại 3 - Có báo giá" value="loai3" />
-            <el-option label="Loại 2 - Ký HĐ nguyên tắc" value="loai2" />
-            <el-option label="Loại 1 - Có đơn hàng" value="loai1" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Mã khách hàng" prop="maKhachHang">
-          <el-input v-model="form.maKhachHang" />
-        </el-form-item>
-
-        <el-form-item label="NVKD chính" prop="nvkdChinh">
-          <el-input v-model="form.nvkdChinh" />
-        </el-form-item>
-
-        <el-form-item label="NVKD phụ" prop="nvkdPhu">
-          <el-input v-model="form.nvkdPhu" />
-        </el-form-item>
-
-        <el-form-item label="Mã đơn hàng" prop="donHang">
-          <el-input v-model="form.donHang" />
-        </el-form-item>
-
-        <el-form-item label="Đính kèm HĐ nguyên tắc">
-          <el-upload
-            action="#"
-            :auto-upload="false"
-            :limit="1"
-            :on-change="handleContractChange"
-          >
-            <el-button type="primary">Tải lên hợp đồng</el-button>
-          </el-upload>
-        </el-form-item>
-      </el-col>
-
-      <!-- Cột phải -->
-      <el-col :xs="24" :sm="12">
-        <el-form-item label="Gán CSKH" prop="nhanVienChamSoc">
-          <el-select
-            v-model="form.nhanVienChamSoc"
-            multiple
-            placeholder="Chọn nhân viên"
-            style="width: 100%"
-          >
-            <el-option label="Nguyễn Văn A" value="nv1" />
-            <el-option label="Trần Thị B" value="nv2" />
-          </el-select>
-        </el-form-item>
-
-        <el-form-item label="Mã số thuế" prop="maSoThue">
-          <el-input v-model="form.maSoThue" />
-        </el-form-item>
-
-        <el-form-item label="Địa điểm công ty" prop="diaDiemCongTy">
-          <el-input v-model="form.diaDiemCongTy" />
-        </el-form-item>
-
-        <el-form-item label="Tên giám đốc" prop="tenGiamDoc">
-          <el-input v-model="form.tenGiamDoc" />
-        </el-form-item>
-
-        <el-form-item label="Ngày sinh Giám đốc" prop="ngaySinhGiamDoc">
-          <el-date-picker
-            v-model="form.ngaySinhGiamDoc"
-            type="date"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Ngày sinh khách hàng" prop="ngaySinhKH">
-          <el-date-picker
-            v-model="form.ngaySinhKH"
-            type="date"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Địa điểm giao hàng" prop="diaDiemGiaoHang">
-          <el-input v-model="form.diaDiemGiaoHang" />
-        </el-form-item>
-
-        <el-form-item label="Tuổi nợ (ngày)" prop="tuoiNo">
-          <el-input-number v-model="form.tuoiNo" :min="0" style="width: 100%" />
-        </el-form-item>
-
-        <el-form-item label="Hạn mức nợ" prop="hanMucNo">
-          <el-input-number
-            v-model="form.hanMucNo"
-            :min="0"
-            style="width: 100%"
-          />
-        </el-form-item>
-
-        <el-form-item label="Người giám sát" prop="giamSat">
-          <el-input v-model="form.giamSat" />
-        </el-form-item>
-
-        <el-form-item label="Nhóm ZALO" prop="nhomZalo">
-          <el-input v-model="form.nhomZalo" />
-        </el-form-item>
-
-        <el-form-item label="Đính kèm CCCD / GPKD">
-          <el-upload
-            action="#"
-            :auto-upload="false"
-            :limit="5"
-            multiple
-            :on-change="handleCCCDChange"
-          >
-            <el-button type="primary">Tải lên tài liệu</el-button>
-          </el-upload>
-        </el-form-item>
-      </el-col>
-    </el-row>
-
-    <!-- Các phần toàn dòng -->
-    <el-form-item label="Logs chăm sóc" prop="logsChamSoc">
-      <el-input v-model="form.logsChamSoc" type="textarea" rows="3" />
-    </el-form-item>
-
-    <el-form-item label="Nhu cầu quan tâm" prop="nhuCau">
-      <el-input v-model="form.nhuCau" type="textarea" rows="2" />
-    </el-form-item>
-
-    <el-form-item label="Log đánh giá / góp ý / claim" prop="logDanhGia">
-      <el-input v-model="form.logDanhGia" type="textarea" rows="2" />
-    </el-form-item>
-
-    <!-- Nút hành động -->
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)"
-        >Tạo mới</el-button
-      >
-      <el-button @click="resetForm(ruleFormRef)">Huỷ</el-button>
-    </el-form-item>
-  </el-form>
+            Delete
+          </el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <KTNewData></KTNewData>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted, onBeforeMount } from "vue";
-import type { ComponentSize, FormInstance, FormRules } from "element-plus";
-interface RuleForm {
-  maData: string;
-  taiKhoanKH: string;
-  tenKH: string;
-  soDienThoai: string;
-  nganhData: string;
-  nguonData: string;
-  nguoiPhuTrach: string;
-  logsChamSoc: string;
-  loaiKH: string;
-  maKhachHang: string;
-  nvkdChinh: string;
-  nvkdPhu: string;
-  nhanVienChamSoc: string[];
-  nhuCau: string;
-  maSoThue: string;
-  diaDiemCongTy: string;
-  tenGiamDoc: string;
-  ngaySinhGiamDoc: string;
-  ngaySinhKH: string;
-  diaDiemGiaoHang: string;
-  tuoiNo: number;
-  hanMucNo: number;
-  giamSat: string;
-  nhomZalo: string;
-  donHang: string;
-  logDanhGia: string;
-}
-const ruleFormRef = ref<FormInstance>();
-const rules = ref({});
-const form = reactive({
-  maData: "DATA123456",
-  taiKhoanKH: "",
-  tenKH: "",
-  soDienThoai: "",
-  nganhData: "",
-  nguonData: "",
-  nguoiPhuTrach: "",
-  logsChamSoc: "",
-  loaiKH: "",
-  maKhachHang: "",
-  nvkdChinh: "",
-  nvkdPhu: "",
-  nhanVienChamSoc: [],
-  nhuCau: "",
-  maSoThue: "",
-  diaDiemCongTy: "",
-  tenGiamDoc: "",
-  ngaySinhGiamDoc: "",
-  ngaySinhKH: "",
-  diaDiemGiaoHang: "",
-  tuoiNo: 0,
-  hanMucNo: 0,
-  giamSat: "",
-  nhomZalo: "",
-  donHang: "",
-  logDanhGia: "",
-});
-onBeforeMount(() => {
-  getRules();
-})
+import { computed, ref } from "vue";
+import KTNewData from "@/components/modals/forms/AddNewData.vue";
+import { ElMessage, ElMessageBox } from 'element-plus'
+import type { TableInstance } from 'element-plus'
 
-const getRules = () => {
-  Object.keys(form).forEach((key) => {
-    const arrRule = [
-      {
-        required: false,
-      },
-    ];
-    rules.value[key] = arrRule
-  })
-  rules.value.taiKhoanKH = [
+interface tableData {
+  maData: string,
+  taiKhoanKhachHang: string,
+  tenKhachHang: string,
+  soDienThoai: string,
+  nganhData: string,
+  nguonData: string,
+  nguoiPhuTrach: string,
+  nhuCau: string,
+  nhomZalo: string,
+  logsChamSoc: string,
+  maSoThue: string,
+  diaDiemCongTy: string,
+  tenGiamDoc: string,
+  ngaySinhGiamDoc: string,
+  ngaySinhKhachHang: string,
+  diaDiemGiaoHang: string,
+  tuoiNo: number,
+  hanMucNo: number,
+  nvkdChinh: string,
+  nvkdPhu: string,
+  nhanVienChamSoc: string,
+  giamSat: string,
+}
+
+const search = ref("");
+const multipleSelection = ref<tableData[]>([])
+const multipleTableRef = ref<TableInstance>()
+const filterTableData = computed(() =>
+  tableData.filter(
+    (data) =>
+      !search.value ||
+      data.maData.toLowerCase().includes(search.value.toLowerCase()),
+  ),
+);
+const handleEdit = (row: tableData) => {
+  console.log(row);
+};
+const handleDelete = (index: number, row: tableData) => {
+  console.log(index, row);
+};
+function numberFormat(number: any, getDecimal: boolean = false) {
+  if (!number) return "";
+  number = String(number); // chuyển về string
+  if (number.indexOf(".") === -1) {
+    number += ".00";
+  }
+  var parts = number.split(".");
+  var integerPart = parts[0];
+  var decimalPart = parts[1];
+  // thêm dấu ',' vào giữa các phần ngàn của phần số nguyên
+  integerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  if ((!decimalPart || decimalPart === "00") && !getDecimal) {
+    return integerPart;
+  }
+  return integerPart + "." + decimalPart;
+}
+const handleSelectionChange = (val: tableData[]) => {
+  multipleSelection.value = val
+}
+const openConfirm = () => {
+  ElMessageBox.confirm(
+    'Bạn muốn gán nhân viên ... làm nhân viên phụ trách data?',
+    'Warning',
     {
-      required: true,
-      message: "Bạn chưa nhập tài khoản khách hàng!",
-      trigger: "blur",
+      confirmButtonText: 'Đồng ý',
+      cancelButtonText: 'Hủy bỏ',
+      type: 'warning',
     }
-  ];
-  rules.value.soDienThoai = [
-    {
-      required: true,
-      message: "Bạn chưa nhập số điện thoại!",
-      trigger: "change",
-    }
-  ];
-};
-const handleContractChange = (file: any) => {
-  console.log("Hợp đồng:", file.name);
-};
-const handleCCCDChange = (file: any) => {
-  console.log("Tài liệu CCCD/GPKD:", file.name);
-};
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log("submit!");
-    } else {
-      console.log("error submit!", fields);
-    }
-  });
-};
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
+  )
+    .then(() => {
+      multipleTableRef.value!.clearSelection()
+      ElMessage({
+        type: 'success',
+        message: 'Thành công!',
+      })
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Không thành công!',
+      })
+    })
+}
+
+const tableData: tableData[] = [
+  {
+    maData: "DATA1",
+    taiKhoanKhachHang: "hungleip9",
+    tenKhachHang: "Lê Quang Hùng",
+    soDienThoai: "0898562269",
+    nganhData: "Thương mại",
+    nguonData: "Shopee",
+    nguoiPhuTrach: "nv1",
+    nhuCau: "Mua xắm",
+    nhomZalo: "Zalo vip 1",
+    logsChamSoc: "",
+    maSoThue: "1700",
+    diaDiemCongTy: "115 - Bùi Thị Xuân",
+    tenGiamDoc: "Lê Quang Châu",
+    ngaySinhGiamDoc: "1/1/1997",
+    ngaySinhKhachHang: "1/1/1998",
+    diaDiemGiaoHang: "115 - Bùi Thị Xuân",
+    tuoiNo: 1,
+    hanMucNo: 20000000,
+    nvkdChinh: "nv1",
+    nvkdPhu: "nv2",
+    nhanVienChamSoc: "",
+    giamSat: "nv1",
+  },
+  {
+    maData: "DATA2",
+    taiKhoanKhachHang: "hungleip9",
+    tenKhachHang: "Lê Quang Hùng",
+    soDienThoai: "0898562269",
+    nganhData: "Thương mại",
+    nguonData: "Shopee",
+    nguoiPhuTrach: "nv1",
+    nhuCau: "Mua xắm",
+    nhomZalo: "Zalo vip 1",
+    logsChamSoc: "",
+    maSoThue: "1700",
+    diaDiemCongTy: "115 - Bùi Thị Xuân",
+    tenGiamDoc: "Lê Quang Châu",
+    ngaySinhGiamDoc: "1/1/1997",
+    ngaySinhKhachHang: "1/1/1998",
+    diaDiemGiaoHang: "115 - Bùi Thị Xuân",
+    tuoiNo: 1,
+    hanMucNo: 20000000,
+    nvkdChinh: "nv1",
+    nvkdPhu: "nv2",
+    nhanVienChamSoc: "",
+    giamSat: "nv1",
+  },
+  {
+    maData: "DATA4",
+    taiKhoanKhachHang: "hungleip9",
+    tenKhachHang: "Lê Quang Hùng",
+    soDienThoai: "0898562269",
+    nganhData: "Thương mại",
+    nguonData: "Shopee",
+    nguoiPhuTrach: "nv1",
+    nhuCau: "Mua xắm",
+    nhomZalo: "Zalo vip 1",
+    logsChamSoc: "",
+    maSoThue: "1700",
+    diaDiemCongTy: "115 - Bùi Thị Xuân",
+    tenGiamDoc: "Lê Quang Châu",
+    ngaySinhGiamDoc: "1/1/1997",
+    ngaySinhKhachHang: "1/1/1998",
+    diaDiemGiaoHang: "115 - Bùi Thị Xuân",
+    tuoiNo: 1,
+    hanMucNo: 20000000,
+    nvkdChinh: "nv1",
+    nvkdPhu: "nv2",
+    nhanVienChamSoc: "",
+    giamSat: "nv1",
+  },
+  {
+    maData: "DATA3",
+    taiKhoanKhachHang: "hungleip9",
+    tenKhachHang: "Lê Quang Hùng",
+    soDienThoai: "0898562269",
+    nganhData: "Thương mại",
+    nguonData: "Shopee",
+    nguoiPhuTrach: "nv1",
+    nhuCau: "Mua xắm",
+    nhomZalo: "Zalo vip 1",
+    logsChamSoc: "",
+    maSoThue: "1700",
+    diaDiemCongTy: "115 - Bùi Thị Xuân",
+    tenGiamDoc: "Lê Quang Châu",
+    ngaySinhGiamDoc: "1/1/1997",
+    ngaySinhKhachHang: "1/1/1998",
+    diaDiemGiaoHang: "115 - Bùi Thị Xuân",
+    tuoiNo: 1,
+    hanMucNo: 20000000,
+    nvkdChinh: "nv1",
+    nvkdPhu: "nv2",
+    nhanVienChamSoc: "",
+    giamSat: "nv1",
+  },
+];
 </script>
 
 <style scoped>
-.form-container {
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
 </style>
